@@ -20,9 +20,9 @@ export class Dashboard {
     },
     { 
       id: 2,
-      title: 'CYBER DEFENSE', 
+      title: 'SCHEDULE', 
       description: 'Monitor firewall status and threat detection',
-      icon: '🛡️',
+      icon: '📅',
       clickable: false
     },
     { 
