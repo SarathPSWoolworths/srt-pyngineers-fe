@@ -1,0 +1,279 @@
+.cyber-dashboard {
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+// Animated Grid Background
+.grid-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(50px); }
+}
+
+// Header Styles
+.cyber-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+h1.glitch {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  position: relative;
+  text-shadow: 
+    0 0 10px var(--cyber-neon-blue),
+    0 0 20px var(--cyber-neon-blue),
+    0 0 40px var(--cyber-neon-blue),
+    0 0 80px var(--cyber-neon-blue);
+  animation: flicker 3s infinite;
+
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::before {
+    color: var(--cyber-neon-pink);
+    animation: glitch-1 0.5s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    transform: translate(-2px, -2px);
+    opacity: 0.8;
+  }
+
+  &::after {
+    color: var(--cyber-neon-blue);
+    animation: glitch-2 0.5s infinite;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translate(-2px, -2px); }
+  25% { transform: translate(2px, 0); }
+  50% { transform: translate(-1px, 2px); }
+  75% { transform: translate(1px, -1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translate(2px, 2px); }
+  25% { transform: translate(-2px, 0); }
+  50% { transform: translate(1px, -2px); }
+  75% { transform: translate(-1px, 1px); }
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 10px var(--cyber-neon-blue),
+      0 0 20px var(--cyber-neon-blue),
+      0 0 40px var(--cyber-neon-blue),
+      0 0 80px var(--cyber-neon-blue);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.tagline {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--cyber-neon-pink);
+  letter-spacing: 0.3rem;
+  margin-top: 1rem;
+  opacity: 0.9;
+}
+
+// Cards Container
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+// Cyber Card Styles
+.cyber-card {
+  position: relative;
+  background: linear-gradient(145deg, #151520, #1a1a28);
+  border: 1px solid var(--cyber-border);
+  border-radius: 8px;
+  padding: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  // Neon glow effect on hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: transparent;
+    border-radius: 10px;
+    z-index: -1;
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: transparent;
+
+    &::before {
+      background: linear-gradient(45deg, var(--cyber-neon-blue), var(--cyber-neon-purple), var(--cyber-neon-blue));
+      animation: neonBorder 1.5s linear infinite;
+      box-shadow: 
+        0 0 15px var(--cyber-neon-blue),
+        0 0 30px var(--cyber-neon-blue),
+        0 0 45px var(--cyber-neon-blue);
+    }
+
+    .card-glow {
+      opacity: 1;
+    }
+
+    .card-title {
+      text-shadow: 0 0 10px var(--cyber-neon-blue);
+    }
+  }
+}
+
+@keyframes neonBorder {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+}
+
+.card-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+}
+
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cyber-neon-blue);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1rem;
+  transition: text-shadow 0.3s ease;
+}
+
+.card-description {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--cyber-text-muted);
+  line-height: 1.6;
+}
+
+.card-action {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--cyber-neon-pink);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.5; }
+}
+
+// Scan Line Effect
+.card-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cyber-neon-blue), transparent);
+  opacity: 0;
+  animation: scan 3s linear infinite;
+}
+
+.cyber-card:hover .card-scan-line {
+  opacity: 1;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  h1.glitch {
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+  }
+
+  .cards-container {
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+}

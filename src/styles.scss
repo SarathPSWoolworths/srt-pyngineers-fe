@@ -1,0 +1,76 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// Cyberpunk Theme Variables
+:root {
+  --cyber-bg: #0a0a0f;
+  --cyber-bg-secondary: #12121a;
+  --cyber-neon-blue: #00f0ff;
+  --cyber-neon-pink: #ff00ff;
+  --cyber-neon-purple: #b300ff;
+  --cyber-text: #e0e0e0;
+  --cyber-text-muted: #888;
+  --cyber-card-bg: linear-gradient(145deg, #151520, #1a1a28);
+  --cyber-border: #2a2a3a;
+}
+
+html {
+  height: 100%;
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: dark;
+
+  // Cyberpunk styling
+  background: var(--cyber-bg);
+  color: var(--cyber-text);
+  font-family: 'Orbitron', 'Roboto Mono', monospace;
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+// Import Orbitron font
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Roboto+Mono:wght@300;400;500&display=swap');
+
+/* Cyberpunk Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyber-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-neon-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-neon-pink);
+}
+

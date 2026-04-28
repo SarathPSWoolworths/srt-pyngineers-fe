@@ -1,0 +1,32 @@
+<div class="cyber-dashboard">
+  <!-- Animated Background Grid -->
+  <div class="grid-bg"></div>
+  
+  <!-- Header Section -->
+  <header class="cyber-header">
+    <h1 class="glitch" data-text="PYNGINEERS">PYNGINEERS</h1>
+    <p class="tagline">// ENGINEERING THE FUTURE WITH CODE</p>
+  </header>
+
+  <!-- Cards Grid -->
+  <div class="cards-container">
+    @for (card of cards; track card.id) {
+      <div 
+        class="cyber-card" 
+        [class.clickable]="card.clickable"
+        (click)="onCardClick(card)"
+      >
+        <div class="card-glow"></div>
+        <div class="card-content">
+          <div class="card-icon">{{ card.icon }}</div>
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="card-description">{{ card.description }}</p>
+          @if (card.clickable) {
+            <span class="card-action">[ CLICK TO ACCESS ]</span>
+          }
+        </div>
+        <div class="card-scan-line"></div>
+      </div>
+    }
+  </div>
+</div>
